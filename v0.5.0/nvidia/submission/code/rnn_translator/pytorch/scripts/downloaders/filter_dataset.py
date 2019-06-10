@@ -53,7 +53,7 @@ def main():
         for idx, lines in enumerate(zip(f1, f2)):
             line1, line2 = lines
             if idx % 100000 == 1:
-                print(f'Processed {idx} lines')
+                print('Processed lines: '+str(idx))
             try:
                 line1.encode('latin1')
                 line2.encode('latin1')
@@ -66,7 +66,7 @@ def main():
                 c.update(line1)
 
     ratio = valid / (skipped + valid)
-    print(f'Skipped: {skipped}, Valid: {valid}, Valid ratio {ratio}')
+    #print(f'Skipped: {skipped}, Valid: {valid}, Valid ratio {ratio}')
     print('Character frequency:', c)
 
     save_output(args.file1, data1)

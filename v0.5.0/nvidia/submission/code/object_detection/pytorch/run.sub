@@ -16,8 +16,8 @@ DATESTAMP=${DATESTAMP:-`date +'%y%m%d%H%M%S'`}
 BENCHMARK=${BENCHMARK:-"object_detection"}
 BENCHMARK_NAME="maskrcnn"
 CONT=${CONT:-"mlperf-nvidia:$BENCHMARK"}
-DATADIR=${DATADIR:-"/raid/data/coco2014"}
-LOGDIR=${LOGDIR:-"/raid/results/$BENCHMARK"}
+DATADIR=${DATADIR:-"/workspace/datasets/coco"}
+LOGDIR=${LOGDIR:-"/workspace/logs/$BENCHMARK"}
 SHAREDDIR=${SHAREDDIR:-"/scratch"} # Shared dir between all nodes 
 NEXP=${NEXP:-5} # Default number of times to run the benchmark
 
@@ -51,7 +51,7 @@ mkdir -p $(dirname "${LOGFILE_BASE}")
 
 ## Docker params
 CONTVOLS="-v $DATADIR:/data -v $LOGDIR:/results -v $SHAREDDIR:/shared"
-DOCKEREXEC="nvidia-docker run --rm --net=host --uts=host --ipc=host --ulimit stack=67108864 --ulimit memlock=-1 --name=cont_${SLURM_JOB_ID} --security-opt seccomp=unconfined $IBDEVICES"
+DOCKEREXEC="docker run --runtime nvidia --rm --net=host --uts=host --ipc=host --ulimit stack=67108864 --ulimit memlock=-1 --name=cont_${SLURM_JOB_ID} --security-opt seccomp=unconfined $IBDEVICES"
 
 ## Prep run and launch
 MASTER_IP=`getent hosts \`hostname\` | cut -d ' ' -f1`

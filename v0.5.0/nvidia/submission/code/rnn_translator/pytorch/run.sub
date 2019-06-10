@@ -50,7 +50,7 @@ mkdir -p $(dirname "${LOGFILE_BASE}")
 
 ## Docker params
 CONTVOLS="-v $DATADIR:/data -v $LOGDIR:/results"
-DOCKEREXEC="nvidia-docker run --rm --net=host --uts=host --ipc=host --ulimit stack=67108864 --ulimit memlock=-1 --name=cont_${SLURM_JOB_ID} --security-opt seccomp=unconfined $IBDEVICES"
+DOCKEREXEC="docker run --runtime nvidia --rm --net=host --uts=host --ipc=host --ulimit stack=67108864 --ulimit memlock=-1 --name=cont_${SLURM_JOB_ID} --security-opt seccomp=unconfined $IBDEVICES"
 
 ## Prep run and launch
 MASTER_IP=`getent hosts \`hostname\` | cut -d ' ' -f1`
