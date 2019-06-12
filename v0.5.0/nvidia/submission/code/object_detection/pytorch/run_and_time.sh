@@ -1,5 +1,6 @@
 #!/bin/bash
-
+mkdir -p /coco/models/
+cp /workspace/object_detection/R-50.pth /coco/models/R-50.pth
 DGXSYSTEM=${DGXSYSTEM:-"DGX1"}
 if [[ -f config_${DGXSYSTEM}.sh ]]; then
   source config_${DGXSYSTEM}.sh

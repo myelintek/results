@@ -9,9 +9,11 @@ tar xzf coco_annotations_minival.tgz
 
 curl -O http://images.cocodataset.org/zips/train2014.zip
 unzip train2014.zip
+mv train2014 coco_train2014
 
 curl -O http://images.cocodataset.org/zips/val2014.zip
 unzip val2014.zip
+mv val2014 coco_val2014
 
 curl -O http://images.cocodataset.org/annotations/annotations_trainval2014.zip
 unzip annotations_trainval2014.zip

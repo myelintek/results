@@ -31,5 +31,7 @@ RUN git clone -b v0.1 https://github.com/NVIDIA/cocoapi.git \
 WORKDIR /workspace/object_detection
 COPY . .
 RUN pip install -e .
+RUN ./download_weights.sh && \
+./convert_c2_model.py
 
 ENV OMP_NUM_THREADS=1
