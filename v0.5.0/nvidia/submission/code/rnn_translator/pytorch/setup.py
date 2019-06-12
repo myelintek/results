@@ -11,7 +11,8 @@ cat_utils = CUDAExtension(
                         sources=['seq2seq/csrc/pack_utils.cpp', 'seq2seq/csrc/pack_utils_kernel.cu'],
                         extra_compile_args={
                                 'cxx': ['-O2',],
-                                'nvcc':['--gpu-architecture=sm_70',]
+#                                'nvcc':['--gpu-architecture=sm_61',],
+                                'nvcc': ['-arch=sm_60', '-gencode=arch=compute_60,code=sm_60', '-gencode=arch=compute_61,code=sm_61', '-gencode=arch=compute_70,code=sm_70', '-gencode=arch=compute_75,code=sm_75', '-gencode=arch=compute_75,code=compute_75' ,]
                         }
 )
 

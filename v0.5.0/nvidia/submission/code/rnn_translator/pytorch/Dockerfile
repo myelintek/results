@@ -24,6 +24,5 @@ RUN pip install -r requirements.txt
 # Copy GNMT code and build
 COPY . .
 RUN pip install .
-
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
