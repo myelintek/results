@@ -53,7 +53,7 @@ mkdir -p $(dirname "${LOGFILE_BASE}")
 ## Docker params
 export VOLS="-v $DATADIR:/data -v $LOGDIR:/results"
 export CONTNAME="mpi_${SLURM_JOB_ID}"
-export DOCKEREXEC="nvidia-docker run --rm --net=host --uts=host --ipc=host --ulimit stack=67108864 --ulimit memlock=-1 --security-opt seccomp=unconfined  $IBDEVICES"
+export DOCKEREXEC="docker run --rm --runtime nvidia --net=host --uts=host --ipc=host --ulimit stack=67108864 --ulimit memlock=-1 --security-opt seccomp=unconfined  $IBDEVICES"
 
 DEBUG=0  # 1 = Print verbose messages for debugging
 

@@ -46,6 +46,7 @@ python -m torch.distributed.launch --nproc_per_node $SLURM_NTASKS_PER_NODE $MULT
   --math fp16 \
   --print-freq 10 \
   --batch-size $BATCH \
+  --val-batch-size $TEST_BATCH_SIZE \
   --test-batch-size $TEST_BATCH_SIZE \
   --model-config "{'num_layers': 4, 'hidden_size': 1024, 'dropout':0.2, 'share_embedding': True}" \
   --optimization-config "{'optimizer': 'FusedAdam', 'lr': $LR}" \
