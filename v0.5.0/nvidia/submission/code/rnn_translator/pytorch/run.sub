@@ -84,6 +84,8 @@ done
 success=0; for s in ${rets[@]}; do ((success+=s)); done ; if [ $success -ne 0 ]; then echo "ERR: Container launch failed."; exit $success ; fi
 sleep 10 # Making sure containers have time to launch 
 
+./mlperf_monitor.sh "cont_${SLURM_JOB_ID}" & 
+
 # Run benchmarks
 export NEXP
 for nrun in `seq 1 $NEXP`; do
@@ -122,11 +124,13 @@ for nrun in `seq 1 $NEXP`; do
          "-e" "SLURM_NTASKS_PER_NODE=$SLURM_NTASKS_PER_NODE"
       )
       # Execute command
-      set -x
+      set -x 
+      docker cp config_${DGXSYSTEM}.sh cont_${SLURM_JOB_ID}:/workspace/rnn_translator #modified
       $(eval echo $SRUN) docker exec "${DOCKERENV[@]}" cont_${SLURM_JOB_ID} ./run_and_time.sh &
     pids+=($!);
       set +x
   done
+  
   wait "${pids[@]}"
 
   ) |& tee ${LOGFILE_BASE}_$nrun.log
